@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 class="title">Journeys</h1>
+<p class="subtitle">A set of logically grouped banking functionality.</p>
+
+{% if journeys %}
+    <ul>
+    {% for j in journeys %}
+        <li>Journey: <a href="{% url 'journey_detail' j.id %}">{{ j.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No journeys are available.</p>
+{% endif %}
+
+{% endblock %}

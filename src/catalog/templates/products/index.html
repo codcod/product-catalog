@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 class="title">Projects</h1>
+<p class="subtitle">Value stream.</p>
+
+{% if projects %}
+    <ul>
+    {% for p in projects %}
+        <li>Project: <a href="{% url 'project_detail' p.id %}">{{ p.name }} | {{ p.key }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No projects are available.</p>
+{% endif %}
+
+{% endblock %}

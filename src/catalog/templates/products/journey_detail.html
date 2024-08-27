@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 class="title">{{ journey.name }}</h1>
+<p class="subtitle">Details of the journey.</p>
+
+<ul>
+{% for feature in journey.feature_set.all %}
+    <li>Feature: <span class="has-text-weight-bold">{{ feature.name }}</span></li>
+
+    <ul>
+    {% for subfeature in feature.subfeature_set.all %}
+    <li>Subfeature: <span class="has-text-info">{{ subfeature.name }}</span></li>
+    {% endfor %}
+    </ul>
+    <br/>
+{% endfor %}
+</ul>
+
+Family: {{ journey.family }}<br/>
+Vendor: {{ journey.vendor_set.first }}<br/>
+Owner: {{ journey.owner_set.first }}<br/>
+Team: {{ journey.team_set.first }}<br/>
+
+{% endblock %}

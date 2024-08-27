@@ -1,0 +1,46 @@
+---
+version: "3.8"
+
+services:
+  postgres:
+    container_name: bbpc-postgres
+    image: bbpc-postgres
+    command: postgres -c 'max_connections=250'
+    build:
+      dockerfile: ./containers/postgres/Dockerfile
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bbpc
+    volumes:
+      - .container-data/postgres/pg_data:/var/lib/postgresql/data
+      #- ./containers/postgres/sql/create.sql:/docker-entrypoint-initdb.d/create.sql
+      #- ./containers/postgres/sql/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ./containers/postgres/psql_history:/.psql_history
+    networks:
+      - bbpc_network
+
+  pgadmin:
+    image: dpage/pgadmin4:7.8
+    ports:
+      - 5050:80
+    depends_on:
+      - postgres
+    environment:
+      # - PGADMIN_LISTEN_PORT=5050
+      - PGADMIN_DEFAULT_EMAIL=bbpc@bbpc.io
+      - PGADMIN_DEFAULT_PASSWORD=bbpc
+      - MASTER_PASSWORD_REQUIRED=False
+    volumes:
+      - ./containers/pgadmin/servers.json:/pgadmin4/servers.json
+      - .container-data/pgadmin4/data:/var/lib/pgadmin
+    networks:
+      - bbpc_network
+
+networks:
+  bbpc_network:
+    driver: bridge
+
+# vim: sw=2:et:ai

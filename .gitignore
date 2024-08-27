@@ -1,0 +1,32 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.coverage
+
+*.sqlite
+*.sqlite3
+
+instance/
+
+*.log
+
+.container-data/
+.mypy_cache/
+.ruff_cache/
+
+compose.override.yaml
+
+.DS_Store
+
+# You can get more comprehensive list with:
+# curl -s -o .gitignore -O https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore# python generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# venv
+.venv

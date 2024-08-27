@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 class="title">{{ project.name }}</h1>
+<p class="subtitle">List of journeys.</p>
+
+<ul>
+{% for journey in project.journeys.all %}
+    <li>Journey: <span class="has-text-weight-bold">{{ journey.name }}</span></li>
+
+    <ul>
+    {% for feature in journey.feature_set.all %}
+    <li>Feature: <span class="has-text-info">{{ feature.name }}</span></li>
+    {% endfor %}
+    </ul>
+    <br/>
+{% endfor %}
+</ul>
+
+Key: {{ project.key }}<br/>
+Counter: {{ project.counter }}<br/>
+
+{% endblock %}
